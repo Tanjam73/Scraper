@@ -1,0 +1,37 @@
+name: collect
+
+# Runs every 30 minutes, commits new data back to the repo. Zero attention needed.
+# Use a PUBLIC repo -> GitHub Actions minutes are unlimited (private = 2000 min/mo cap).
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:        # lets you trigger a run manually from the Actions tab
+
+permissions:
+  contents: write           # required so the job can commit the CSVs
+
+concurrency:                # don't let two runs collide
+  group: collect
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install requests feedparser
+
+      - run: python scrape.py
+
+      - name: commit data
+        run: |
+          git config user.name  "rail-collector-bot"
+          git config user.email "actions@github.com"
+          git add data/*.csv
+          git diff --staged --quiet || git commit -m "data: $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push
