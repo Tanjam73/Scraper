@@ -114,9 +114,10 @@ def existing_links(path):
 # Source 1: rainfall (always log a row per location -- it's a time series)
 # --------------------------------------------------------------------------- #
 
-def fetch_rainfall():
-    rows, ts = [], now_ist()
-    for name, lat, lon, line in LOCATIONS:
+def _get_one(lat, lon, attempts=3):
+    """Fetch one location with retry + backoff (free tier rate-limits bursts)."""
+    last = None
+    for i in range(attempts):
         try:
             r = requests.get(
                 OPEN_METEO,
@@ -130,7 +131,18 @@ def fetch_rainfall():
                 timeout=20,
             )
             r.raise_for_status()
-            cur = r.json().get("current", {})
+            return r.json().get("current", {})
+        except Exception as e:
+            last = e
+            time.sleep(2 * (i + 1))                   # 2s, 4s, 6s backoff
+    raise last
+
+
+def fetch_rainfall():
+    rows, ts = [], now_ist()
+    for name, lat, lon, line in LOCATIONS:
+        try:
+            cur = _get_one(lat, lon)
             rows.append([ts, name, lat, lon, line,
                          cur.get("time", ""),
                          cur.get("precipitation", ""),
@@ -139,7 +151,7 @@ def fetch_rainfall():
         except Exception as e:                       # one bad point != lost run
             print(f"  rainfall {name}: {e}", file=sys.stderr)
             rows.append([ts, name, lat, lon, line, "", "", "", "open-meteo-ERR"])
-        time.sleep(0.4)                              # be polite
+        time.sleep(1.5)                              # gentler spacing between points
     return rows
 
 
