@@ -407,3 +407,15 @@ run_ts_ist,location,lat,lon,line,obs_time,precip_mm,rain_mm,source
 2026-06-27 21:16:52,Kalyan,19.243,73.13,CR,2026-06-27T21:15,0.0,0.0,open-meteo
 2026-06-27 21:16:52,Chunnabhatti,19.046,72.875,Harbour-hotspot,2026-06-27T21:15,0.0,0.0,open-meteo
 2026-06-27 21:16:52,Matunga,19.027,72.852,CR-hotspot,2026-06-27T21:15,0.0,0.0,open-meteo
+2026-06-27 22:29:38,Churchgate,18.935,72.827,WR,2026-06-27T22:15,0.0,0.0,open-meteo
+2026-06-27 22:29:38,Dadar,19.018,72.844,WR/CR,2026-06-27T22:15,0.0,0.0,open-meteo
+2026-06-27 22:29:38,Andheri,19.119,72.846,WR,2026-06-27T22:15,0.0,0.0,open-meteo
+2026-06-27 22:29:38,Borivali,19.231,72.857,WR,2026-06-27T22:15,0.0,0.0,open-meteo
+2026-06-27 22:29:38,Virar,19.455,72.811,WR,,,,open-meteo-ERR
+2026-06-27 22:29:38,CSMT,18.94,72.835,CR,2026-06-27T22:30,0.0,0.0,open-meteo
+2026-06-27 22:29:38,Sion,19.043,72.862,CR-hotspot,2026-06-27T22:30,0.0,0.0,open-meteo
+2026-06-27 22:29:38,Kurla,19.065,72.879,CR-hotspot,2026-06-27T22:30,0.0,0.0,open-meteo
+2026-06-27 22:29:38,Thane,19.186,72.975,CR,2026-06-27T22:30,0.0,0.0,open-meteo
+2026-06-27 22:29:38,Kalyan,19.243,73.13,CR,2026-06-27T22:30,0.0,0.0,open-meteo
+2026-06-27 22:29:38,Chunnabhatti,19.046,72.875,Harbour-hotspot,,,,open-meteo-ERR
+2026-06-27 22:29:38,Matunga,19.027,72.852,CR-hotspot,2026-06-27T22:30,0.0,0.0,open-meteo
